@@ -1,0 +1,44 @@
+# ===== MATLAB =====
+*.asv            # 编辑器自动保存
+*.m~             # 备份
+*.autosave
+*.m.bak
+slprj/           # Simulink 工程缓存
+*.mex*           # 编译目标(按需保留源)
+scc.prj
+
+# ===== 数据缓存(可由 preprocess_city.m 重新生成) =====
+*.mat
+radar/data/city_preview.png
+
+# ===== 源数据(主办方提供, 体积大, 不入库) =====
+题目/区域数据/
+
+# ===== 日志与临时输出 =====
+*.log
+*.tmp
+/tmp/
+
+# ===== 操作系统 =====
+.DS_Store
+Thumbs.db
+desktop.ini
+ehthumbs.db
+
+# ===== IDE / 编辑器 =====
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# ===== Python(脚本辅助用, 非建模主体) =====
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+env/
+
+# ===== 本地 agent 状态(不入库) =====
+.workbuddy/
