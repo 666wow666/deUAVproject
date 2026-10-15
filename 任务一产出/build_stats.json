@@ -1,0 +1,42 @@
+{
+  "building_count": 15889,
+  "triangle_count_buildings": 333952,
+  "triangle_count_terrain": 97082,
+  "height_m": {
+    "min": 3.0,
+    "median": 21.5,
+    "max": 136.0
+  },
+  "base_elev_m": {
+    "min": 69.54168748173305,
+    "median": 99.35954545680647,
+    "max": 138.18939810053814
+  },
+  "top_elev_m": {
+    "min": 78.30836140579595,
+    "max": 243.74666739495348
+  },
+  "dem_elev_m": {
+    "min": 64.0,
+    "max": 139.0
+  },
+  "footprint_area_m2_total": 8356833.889313727,
+  "base_mode": "max",
+  "footprint_relief_m": {
+    "median": 2.446841133536651,
+    "p95": 8.523493793307612,
+    "max": 36.19185468013967
+  },
+  "buried_count": 0,
+  "buried_median_m": 0.0,
+  "enu_origin": {
+    "lon": 113.66216852354252,
+    "lat": 34.78889922570783
+  },
+  "ecef_origin": [
+    -2104572.6136735654,
+    4802964.318926271,
+    3618658.294088561
+  ],
+  "geoid_offset_applied": 4.41
+}
