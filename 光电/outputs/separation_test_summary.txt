@@ -1,0 +1,9 @@
+Saved 6 scenarios: outputs\optical_after_split_demo.json
+clear/day_clear clear {'visible': 0.8, 'thermal': 0.7}
+clear/night_clear clear {'visible': 0.08000000000000002, 'thermal': 0.7}
+clear/day_fog_rain clear {'visible': 0.16074378947141846, 'thermal': 0.3765611063162722}
+blocked/day_clear blocked {'visible': 0.0, 'thermal': 0.0}
+blocked/night_clear blocked {'visible': 0.0, 'thermal': 0.0}
+blocked/day_fog_rain blocked {'visible': 0.0, 'thermal': 0.0}
+......................................                                   [100%]
+38 passed in 0.93s

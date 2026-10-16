@@ -1,0 +1,248 @@
+{
+  "building": {
+    "count": 15889,
+    "source_crs": "EPSG:3857",
+    "target_crs": "EPSG:32649",
+    "fields": {
+      "MAPID": "str",
+      "ID": "str",
+      "CLASS": "str",
+      "SHOW": "str",
+      "LANDMARK3D": "str",
+      "CARTO_ID": "str",
+      "ADMINCODE": "str",
+      "NAME": "str",
+      "NAME_ID": "str",
+      "SRC_FLAG": "str",
+      "RuleID": "int64",
+      "type": "object",
+      "Name1": "object",
+      "Shape_Leng": "float64",
+      "Shape_Area": "float64",
+      "RuleID_1": "int64",
+      "high": "float64"
+    },
+    "geometry_types": {
+      "Polygon": 15889
+    },
+    "invalid_geometries": 0,
+    "source_bounds": [
+      12646826.6182,
+      4131831.434600003,
+      12658802.8268,
+      4138630.1367999986
+    ],
+    "wgs84_bounds": [
+      113.60837646738659,
+      34.763820507721626,
+      113.71596057969842,
+      34.813977943694034
+    ],
+    "height_mapping": null,
+    "missing_vertical_extent": 15889,
+    "vertical_datum": "unknown"
+  },
+  "high_observations": {
+    "min": 3.0,
+    "max": 136.0,
+    "null": 0,
+    "nonpositive": 0,
+    "unique": 223,
+    "semantics": "unknown; not automatically used as height"
+  },
+  "source_files": [
+    {
+      "path": "创意科目二-数据说明.doc",
+      "bytes": 158720,
+      "sha256": "63e1620ec6896a4480c5c0681a8215319620566cb1bf9ea0d4643db2400dc28a"
+    },
+    {
+      "path": "区域数据\\building\\zheng_apart.cpg",
+      "bytes": 5,
+      "sha256": "3ad3031f5503a4404af825262ee8232cc04d4ea6683d42c5dd0a2f2a27ac9824"
+    },
+    {
+      "path": "区域数据\\building\\zheng_apart.dbf",
+      "bytes": 9057308,
+      "sha256": "3576d9e9f916862eef5a1a9a801ff50b6c81720e5319778fed746cab926716ce"
+    },
+    {
+      "path": "区域数据\\building\\zheng_apart.prj",
+      "bytes": 425,
+      "sha256": "f2e7fb14d55bdd8d6a3bc2c272a48729d8f9d0ad72936e20eae6a9a81c2fccd0"
+    },
+    {
+      "path": "区域数据\\building\\zheng_apart.sbn",
+      "bytes": 153916,
+      "sha256": "6577f5192a0f705ecb749d70f5e5a7b1b1544d7593f273cae93032bdd582f9db"
+    },
+    {
+      "path": "区域数据\\building\\zheng_apart.sbx",
+      "bytes": 10892,
+      "sha256": "2a1a11dcde801cebd399752081f2203cda97a757ed84bb88b458abaf088bf51e"
+    },
+    {
+      "path": "区域数据\\building\\zheng_apart.shp",
+      "bytes": 3094668,
+      "sha256": "acf0ba4d2f42f203097bf5ba8600d2c5bb62369b51f87f956f018f2f0375c1bd"
+    },
+    {
+      "path": "区域数据\\building\\zheng_apart.shp.xml",
+      "bytes": 10908,
+      "sha256": "a1e37ba21da360eed996baa6ea50fecf70c0d9905ec8c4cccd687b5b5ae53674"
+    },
+    {
+      "path": "区域数据\\building\\zheng_apart.shx",
+      "bytes": 127212,
+      "sha256": "b8999a792e3c197ed3e26eebae7621deda15c1e7b7008f25549a4a51d1deb4de"
+    },
+    {
+      "path": "区域数据\\dem\\dem.tfw",
+      "bytes": 82,
+      "sha256": "1a43e49f9653bdcc82eacca612f9c01f9e627411c9c853a3f00abdb9a85572e6"
+    },
+    {
+      "path": "区域数据\\dem\\dem.tif",
+      "bytes": 42997,
+      "sha256": "cf5e2f66c546c2a604622d2dab2c00669478e347e090bf032eabc1676818015d"
+    },
+    {
+      "path": "区域数据\\dem\\dem.tif.aux.xml",
+      "bytes": 1593,
+      "sha256": "c5477fd7a0f7399d544c50578e571b538dae31d5c794140dd828adfa44649e4e"
+    },
+    {
+      "path": "区域数据\\dem\\dem.tif.ovr",
+      "bytes": 11720,
+      "sha256": "d7ed8d67ff737fda9986f0f1169c6976c789dda934b9c6230f8f2fcf51438c5a"
+    },
+    {
+      "path": "区域数据\\dem\\dem.tif.xml",
+      "bytes": 6139,
+      "sha256": "87c4be61747eb602b6f8e054f33ac49f617a8bda5df6d382c176563760e925b7"
+    },
+    {
+      "path": "区域数据\\影像\\raster.tfw",
+      "bytes": 82,
+      "sha256": "9b93b183b08301b9254cffbb91e9b3d9bfe5d939600b7bd31a8f18983f1e1710"
+    },
+    {
+      "path": "区域数据\\影像\\raster.tif",
+      "bytes": 28053277,
+      "sha256": "e1eb472c04633623b36fafc70eff1a252a2f75e6303a03ea57ec392015809a38"
+    },
+    {
+      "path": "区域数据\\影像\\raster.tif.aux.xml",
+      "bytes": 7003,
+      "sha256": "6e5b6e5a3ecf6fe77dff0bd62cce3bbfbd6a9a22b9a60b5ebaaeccbb034070a4"
+    },
+    {
+      "path": "区域数据\\影像\\raster.tif.ovr",
+      "bytes": 7867401,
+      "sha256": "0b44d06a47a55758daf3c5180fcefa3f33643aa457ba44055b5fe262d1453c8e"
+    },
+    {
+      "path": "区域数据\\影像\\raster.tif.xml",
+      "bytes": 6002,
+      "sha256": "931198695ddd1cfb30f2828c7bc2a2f96b3ffba597a741ec2086b10c392f324e"
+    },
+    {
+      "path": "区域数据\\白模\\zhengzhou1\\NoLod_0.glb",
+      "bytes": 18568892,
+      "sha256": "a43e3dcb5dac640f278e75f5371a956d01598c2143ff4f304b511cadb35707ab"
+    },
+    {
+      "path": "区域数据\\白模\\zhengzhou1\\NoLod_1.glb",
+      "bytes": 2937420,
+      "sha256": "4a613a4fd8af6f516473b6cdac1654dbf62fcfba4fa4c54361d071c98f74a6de"
+    },
+    {
+      "path": "区域数据\\白模\\zhengzhou1\\scenetree.json",
+      "bytes": 2126121,
+      "sha256": "deef5a76587f34eb8f987792f96c1f7794b60f90b30f954a144b9804c8df279a"
+    },
+    {
+      "path": "区域数据\\白模\\zhengzhou1\\tileset.json",
+      "bytes": 1270,
+      "sha256": "dee52781eac7a9e06baf559357abeb772dc3d4712b34ae8e67dea6a58cb961d1"
+    },
+    {
+      "path": "装备参数.doc",
+      "bytes": 256000,
+      "sha256": "12e731c84d9c24c0bb0af2acc889ee6d09c06d91cd934a4e05e39ea755c69cdc"
+    }
+  ],
+  "pdf": {
+    "path": "C:\\Users\\72665\\Desktop\\07--创意科目二：反无装备优化部署与仿真推演（公开发布版）(1).pdf",
+    "sha256": "4613ae72bc4885ee7911ed4b43d3a6e09f6362304c11d492df4b79ecbbce7867"
+  },
+  "dem": {
+    "crs": "EPSG:4326",
+    "width": 407,
+    "height": 188,
+    "count": 1,
+    "dtype": [
+      "int16"
+    ],
+    "nodata": -9999.0,
+    "bounds": [
+      113.60652777779666,
+      34.76263888888071,
+      113.7195833333523,
+      34.81486111110297
+    ],
+    "pixel_size": [
+      0.0002777777777780023,
+      0.00027777777777799126
+    ],
+    "band_units": [
+      null
+    ],
+    "min": 64.0,
+    "max": 139.0,
+    "valid_pixels": 49138,
+    "vertical_datum": "unknown; dataset description calls this ground altitude; no joint datum verification"
+  },
+  "white_model": {
+    "asset": {
+      "generatetool": "cesiumlab3@www.cesiumlab.com/model2tiles",
+      "version": "1.1"
+    },
+    "properties": {
+      "high": {
+        "extras": {
+          "group": "",
+          "id": "e460cd82d98a1866e7265be1e83c31e9",
+          "name": "high",
+          "type": "double",
+          "unittype": ""
+        },
+        "maximum": -2147483647.0,
+        "minimum": 2147483647.0
+      }
+    },
+    "root_transform": [
+      -0.9159277933328711,
+      -0.40134309188072137,
+      0.0,
+      0.0,
+      0.22898809184363678,
+      -0.5225866893061673,
+      0.8212597676459192,
+      0.0,
+      -0.32960693438425614,
+      0.7522146467329934,
+      0.5705544619457203,
+      0.0,
+      -2104571.457555759,
+      4802961.680484789,
+      3618656.2928835084,
+      1.0
+    ],
+    "content": [
+      "NoLod_0.glb",
+      "NoLod_1.glb"
+    ],
+    "scope": "metadata only; GLB geometry not reconstructed or used as verified height"
+  }
+}
