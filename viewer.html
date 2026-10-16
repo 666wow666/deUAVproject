@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>郑州区域建筑三维模型 — city_model.glb</title>
+<style>
+  html,body{margin:0;height:100%;overflow:hidden;background:#0b0e14;
+            font-family:"Microsoft YaHei",system-ui,sans-serif;color:#e6edf3}
+  #app{position:fixed;inset:0}
+  .panel{position:fixed;background:rgba(13,17,23,.86);border:1px solid #232b36;
+         border-radius:10px;padding:11px 15px;font-size:13px;line-height:1.8;
+         backdrop-filter:blur(8px)}
+  #hud{left:14px;top:14px;max-width:340px}
+  #hud b{color:#58a6ff}
+  #hud .k{color:#8b949e}
+  #hud code{color:#7ee787;background:#161b22;padding:1px 5px;border-radius:4px}
+  #bar{left:14px;bottom:14px;display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+  #bar label{cursor:pointer;user-select:none;white-space:nowrap}
+  #bar input[type=range]{vertical-align:middle;width:110px}
+  #legend{right:14px;top:14px;font-size:12px}
+  #legend .row{display:flex;align-items:center;gap:8px;margin:3px 0}
+  #legend i{width:20px;height:11px;border-radius:2px;display:inline-block}
+  button{background:#21262d;color:#e6edf3;border:1px solid #30363d;border-radius:6px;
+         padding:3px 11px;cursor:pointer;font-size:12px;font-family:inherit}
+  button:hover{background:#30363d;border-color:#8b949e}
+  #load{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;
+        background:#0b0e14;font-size:15px;z-index:9;text-align:center;line-height:2}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<div id="load">正在加载 city_model.glb …（41 MB，首次需数秒）</div>
+
+<div id="hud" class="panel">
+  <div><b>郑州局域建筑三维模型</b></div>
+  <div><span class="k">数据源</span> zheng_apart.shp（15,889 栋轮廓 + <code>high</code>）+ dem.tif（30 m）</div>
+  <div><span class="k">几何</span> 333,952 建筑面 + 97,082 地形面</div>
+  <div><span class="k">高程</span> 基底 64–129 m，屋顶最高 242 m</div>
+  <div><span class="k">颜色</span> 按每栋实际高度着色</div>
+</div>
+
+<div id="legend" class="panel">
+  <div style="margin-bottom:6px"><b>建筑高度 high (m)</b></div>
+  <div class="row"><i style="background:#2a3a8c"></i>3</div>
+  <div class="row"><i style="background:#3ba19b"></i>15</div>
+  <div class="row"><i style="background:#89c56a"></i>30</div>
+  <div class="row"><i style="background:#f2d65c"></i>50</div>
+  <div class="row"><i style="background:#db6c34"></i>70</div>
+  <div class="row"><i style="background:#c22e24"></i>90+</div>
+</div>
+
+<div id="bar" class="panel">
+  <label><input type="checkbox" id="cbB" checked> 建筑</label>
+  <label><input type="checkbox" id="cbT" checked> 地形</label>
+  <label>垂直夸张 <input type="range" id="zex" min="1" max="5" step="0.1" value="1"> <span id="zxv">1.0×</span></label>
+  <button id="reset">复位视角</button>
+  <span class="k" style="color:#8b949e">左键旋转 · <b style="color:#e6edf3">中键平移</b> · 右键平移 · 滚轮缩放</span>
+</div>
+
+<script type="importmap">
+{"imports":{
+  "three":"./vendor/three.module.js",
+  "three/addons/":"./vendor/"
+}}
+</script>
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+
+const app = document.getElementById('app');
+const renderer = new THREE.WebGLRenderer({ antialias: true });
+renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+renderer.setSize(innerWidth, innerHeight);
+renderer.outputColorSpace = THREE.SRGBColorSpace;
+app.appendChild(renderer.domElement);
+
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0x0b0e14);
+// 注意: 不加雾。模型跨度 ~10 km, 相机距离 ~10 km, 任何"看起来合理"的雾
+// 都会把远处压成背景色, 表现为"模型全黑"。
+
+const camera = new THREE.PerspectiveCamera(45, innerWidth/innerHeight, 10, 400000);
+const controls = new OrbitControls(camera, renderer.domElement);
+controls.enableDamping = true;
+controls.dampingFactor = 0.08;
+controls.maxPolarAngle = Math.PI * 0.495;
+controls.screenSpacePanning = true;      // 平移按屏幕方向(前后左右), 而非沿地平面
+controls.mouseButtons = {                 // 中键 = 平移 (three 默认中键是 dolly)
+  LEFT:   THREE.MOUSE.ROTATE,
+  MIDDLE: THREE.MOUSE.PAN,
+  RIGHT:  THREE.MOUSE.PAN
+};
+controls.touches = { ONE: THREE.TOUCH.ROTATE, TWO: THREE.TOUCH.DOLLY_PAN };
+
+// 光照: 主光 + 两盏补光, 保证体块各个朝向都有层次
+scene.add(new THREE.AmbientLight(0xffffff, 0.35));
+scene.add(new THREE.HemisphereLight(0xcfe3ff, 0x3a4a34, 0.9));
+const key = new THREE.DirectionalLight(0xfff4e2, 2.1);
+key.position.set(-0.35, 0.78, 0.52).multiplyScalar(10000); scene.add(key);
+const fillA = new THREE.DirectionalLight(0x9dc4ff, 0.75);
+fillA.position.set(0.80, 0.36, -0.46).multiplyScalar(10000); scene.add(fillA);
+const fillB = new THREE.DirectionalLight(0xffd9b0, 0.45);
+fillB.position.set(0.20, 0.30, 0.93).multiplyScalar(10000); scene.add(fillB);
+
+const grid = new THREE.GridHelper(30000, 60, 0x1d2733, 0x151c26);
+grid.position.y = -30; scene.add(grid);
+
+let buildings = null, terrain = null, root = null, home = null;
+
+function frameObject(obj) {
+  const box = new THREE.Box3().setFromObject(obj);
+  const size = box.getSize(new THREE.Vector3());
+  const c = box.getCenter(new THREE.Vector3());
+  const radius = size.length() * 0.5;
+  // 模型是 ~10km x 5.6km 的扁平体, 用包围球半径取景会偏远一半以上;
+  // 乘 0.55 让模型铺满画面, 同时按视口宽高比补偿。
+  const fit = Math.min(1, camera.aspect) / Math.min(1, 1.6);
+  const dist = radius / Math.sin(THREE.MathUtils.degToRad(camera.fov * 0.5)) * 0.55 * (0.75 + 0.25 * fit);
+  const dir = new THREE.Vector3(-0.48, 0.50, 0.72).normalize();
+  camera.position.copy(c).addScaledVector(dir, dist);
+  camera.near = Math.max(1, dist / 8000); camera.far = dist * 20;
+  camera.updateProjectionMatrix();
+  controls.target.copy(c);
+  controls.minDistance = radius * 0.005;
+  controls.maxDistance = radius * 14;
+  controls.update();
+  home = { pos: camera.position.clone(), tgt: c.clone() };
+}
+
+new GLTFLoader().load('city_model.glb', gltf => {
+  root = gltf.scene;
+  root.traverse(o => {
+    if (!o.isMesh) return;
+    o.material = new THREE.MeshLambertMaterial({
+      vertexColors: true, side: THREE.DoubleSide });
+    const n = (o.name || '').toLowerCase();
+    if (n.includes('terrain')) terrain = o;
+    else if (n.includes('building')) buildings = o;
+  });
+  scene.add(root);
+  frameObject(root);
+  document.getElementById('load').style.display = 'none';
+}, undefined, err => {
+  document.getElementById('load').innerHTML =
+    '<div><b style="color:#f85149">加载失败：' + err + '</b><br><br>' +
+    '浏览器禁止 <code>file://</code> 读取本地 GLB 与 ES module。<br>' +
+    '请在 output 目录下起本地服务：<br>' +
+    '<code style="color:#7ee787">python -m http.server 8000</code><br>' +
+    '然后访问 <code>http://localhost:8000/viewer.html</code><br>' +
+    '（或直接双击同目录的 start_viewer.bat）</div>';
+});
+
+document.getElementById('cbB').onchange = e => { if (buildings) buildings.visible = e.target.checked; };
+document.getElementById('cbT').onchange = e => { if (terrain) terrain.visible = e.target.checked; };
+document.getElementById('zex').oninput = e => {
+  const v = +e.target.value;
+  document.getElementById('zxv').textContent = v.toFixed(1) + '×';
+  if (root) root.scale.y = v;
+};
+document.getElementById('reset').onclick = () => {
+  if (!home) return;
+  camera.position.copy(home.pos); controls.target.copy(home.tgt); controls.update();
+};
+
+// 双击画面也复位
+renderer.domElement.addEventListener('dblclick', () => document.getElementById('reset').onclick());
+
+addEventListener('resize', () => {
+  camera.aspect = innerWidth / innerHeight; camera.updateProjectionMatrix();
+  renderer.setSize(innerWidth, innerHeight);
+});
+(function loop(){ requestAnimationFrame(loop); controls.update(); renderer.render(scene, camera); })();
+</script>
+</body>
+</html>
